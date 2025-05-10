@@ -39,7 +39,7 @@ public class BaseTest {
     homePage.setDriver(driver);
   }
 
-  @AfterMethod(alwaysRun = false)
+  @AfterMethod
   public void takeFailedResultScreenshot(ITestResult testResult) {
     if (ITestResult.FAILURE == testResult.getStatus()) {
       TakesScreenshot screenshot = (TakesScreenshot) driver;
