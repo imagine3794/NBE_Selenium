@@ -14,24 +14,25 @@ import org.testng.annotations.BeforeMethod;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
 
 
 public class BaseTest {
 
   private WebDriver driver;
   protected HomePage homePage;
-  private String DEMOQA_URL = "https://sampleapp.tricentis.com/101/index.php";
+  private String URL = "https://sampleapp.tricentis.com/101/index.php";
 
   @BeforeClass
   public void setUp() {
     driver = new EdgeDriver();
     driver.manage().window().maximize();
-//    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
   }
 
   @BeforeMethod
   public void loadApplication() {
-    driver.get(DEMOQA_URL);
+    driver.get(URL);
     homePage = new HomePage();
     homePage.setDriver(driver);
   }
@@ -41,10 +42,20 @@ public class BaseTest {
     if (ITestResult.FAILURE == testResult.getStatus()) {
       TakesScreenshot screenshot = (TakesScreenshot) driver;
       File source = screenshot.getScreenshotAs(OutputType.FILE);
+      String errorMessage = testResult.getThrowable().getMessage();
+      if (errorMessage != null) {
+        // Get the first line of the error message and limit its length
+        errorMessage = errorMessage.split("\n")[0];
+        errorMessage = errorMessage.length() > 50 ? errorMessage.substring(0, 47) + "..." : errorMessage;
+      } else {
+        errorMessage = "UnknownError";
+      }
+      
       File destination = new File(System.getProperty("user.dir") +
               "/resources/screenshots/(" +
-              java.time.LocalDate.now() + ") " +
-              testResult.getName() + ".png");
+              java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ") " +
+              testResult.getName() + "_" +
+              errorMessage.replaceAll("[^a-zA-Z0-9\\s-]", "_") + ".png");
       try {
         FileHandler.copy(source, destination);
       } catch (IOException e) {

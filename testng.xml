@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Automobile Test Suite">
+    <test name="Automobile Tests" parallel="classes" thread-count="5">
+        <packages>
+            <package name="com.tricentis.tests.automobile.*"/>
+        </packages>
+    </test>
+</suite> 
