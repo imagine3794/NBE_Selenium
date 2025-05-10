@@ -11,10 +11,10 @@ import com.tricentis.pages.AutomobilePage;
 import io.qameta.allure.*;
 @Feature("Automobile Insurance")
 @Story("Vehicle Data Entry")
-public class EnterVehicleDataTestNissan extends BaseTest {
+public class EnterVehicleDataTestSym extends BaseTest {
  
   @Test(dataProvider = "SearchProvider")
-  @Description("Test entering vehicle data for a Nissan car")
+  @Description("Test entering vehicle data for a SYM car")
   @Severity(SeverityLevel.CRITICAL)
   public void testEnterVehicleData(
   String make, 
@@ -88,7 +88,7 @@ public class EnterVehicleDataTestNissan extends BaseTest {
   public Object[][] getDataFromDataprovider(Method m){
     if(m.getName().equalsIgnoreCase("testEnterVehicleData")){
       return new Object[][] {
-        { "Nissan", "100", "12/15/2024", "5", "Gas", "500", "ABC123", "10000" }
+        { "SYM", "100", "12/15/2024", "5", "Gas", "500", "ABC123", "10000" }
       };
     }
     return new Object[][] {};
