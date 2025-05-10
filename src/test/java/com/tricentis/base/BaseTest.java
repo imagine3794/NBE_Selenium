@@ -54,8 +54,13 @@ public class BaseTest {
       }
       
       // Save to file system (existing functionality)
-      File destination = new File(System.getProperty("user.dir") +
-              "/resources/screenshots/(" +
+      File screenshotsDir = new File(System.getProperty("user.dir") + "/resources/screenshots");
+      if (!screenshotsDir.exists()) {
+          screenshotsDir.mkdirs();
+      }
+      
+      File destination = new File(screenshotsDir,
+              "(" +
               java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ") " +
               testResult.getName() + "_" +
               errorMessage.replaceAll("[^a-zA-Z0-9\\s-]", "_") + ".png");
