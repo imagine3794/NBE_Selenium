@@ -11,10 +11,12 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import io.qameta.allure.Attachment;
 
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
+import java.nio.file.Files;
 
 
 public class BaseTest {
@@ -51,6 +53,7 @@ public class BaseTest {
         errorMessage = "UnknownError";
       }
       
+      // Save to file system (existing functionality)
       File destination = new File(System.getProperty("user.dir") +
               "/resources/screenshots/(" +
               java.time.LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss")) + ") " +
@@ -58,10 +61,21 @@ public class BaseTest {
               errorMessage.replaceAll("[^a-zA-Z0-9\\s-]", "_") + ".png");
       try {
         FileHandler.copy(source, destination);
+        // Attach screenshot to Allure report
+        attachScreenshotToAllure(source, testResult.getName());
       } catch (IOException e) {
         throw new RuntimeException(e);
       }
       System.out.println("Screenshot Located At " + destination);
+    }
+  }
+
+  @Attachment(value = "{screenshotName}", type = "image/png")
+  private byte[] attachScreenshotToAllure(File screenshot, String screenshotName) {
+    try {
+      return Files.readAllBytes(screenshot.toPath());
+    } catch (IOException e) {
+      throw new RuntimeException("Failed to attach screenshot to Allure report", e);
     }
   }
 
