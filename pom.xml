@@ -13,7 +13,7 @@
     <maven.compiler.target>21</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <aspectj.version>1.9.21</aspectj.version>
-    <allure.version>2.25.0</allure.version>
+    <allure.version>2.29.1</allure.version>
   </properties>
 
   <dependencies>
@@ -81,9 +81,9 @@
       <plugin>
         <groupId>io.qameta.allure</groupId>
         <artifactId>allure-maven</artifactId>
-        <version>2.12.0</version>
+        <version>2.15.2</version>
         <configuration>
-          <reportVersion>${allure.version}</reportVersion>
+          <reportVersion>2.34.0</reportVersion>
           <autoOpen>true</autoOpen>
         </configuration>
       </plugin>
