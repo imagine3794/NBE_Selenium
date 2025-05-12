@@ -18,7 +18,7 @@ pipeline {
         stage('Publish Report') {
             steps {
                 publishHTML(target: [
-                    reportDir: 'target/allure-report',
+                    reportDir: './allure-report',
                     reportFiles: 'index.html',
                     keepAll: true,
                     alwaysLinkToLastBuild: true,
