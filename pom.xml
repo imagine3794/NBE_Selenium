@@ -84,7 +84,6 @@
         <version>2.15.2</version>
         <configuration>
           <reportVersion>2.34.0</reportVersion>
-          <autoOpen>true</autoOpen>
         </configuration>
       </plugin>
     </plugins>

@@ -1,35 +1,25 @@
 pipeline {
     agent any
-    
-    tools {
-        maven 'Maven'
-        jdk 'JDK21'
-        allure 'Allure'
-    }
-    
     stages {
         stage('Checkout') {
             steps {
-                checkout scm
+                git branch: 'main', url: 'https://github.com/imagine3794/NBE_Selenium.git'
             }
         }
-        
-        stage('Build and Test') {
+        stage('Build') {
             steps {
                 sh 'mvn clean test'
             }
         }
-    }
-    
-    post {
-        always {
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'target/allure-results']]
-            ])
+        stage('Generate Allure Report') {
+            steps {
+                sh 'allure generate ./allure-results --clean --single-file -o ./allure-report'
+            }
+        }
+        stage('Publish Report') {
+            steps {
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            }
         }
     }
-} 
+}
