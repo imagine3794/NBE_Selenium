@@ -16,7 +16,7 @@ pipeline {
             }
         }
         stage('Publish Report') {
-            ssteps {
+            steps {
                 publishHTML(target: [
                     reportDir: 'allure-report',
                     reportFiles: 'index.html',
