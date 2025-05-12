@@ -46,56 +46,59 @@ public class EnterVehicleDataTestSym extends BaseTest {
   String password,
   String confirmPassword
   ) {
-    AutomobilePage automobilePage = homePage.goToAutomobile();
+    try {
+      AutomobilePage automobilePage = homePage.goToAutomobile();
 
-    // Entering vehicle data
-    setMake(automobilePage, make);
-    setEnginePerformance(automobilePage, enginePerformance);
-    setDateOfManufacture(automobilePage, dateOfManufacture);
-    setNumberOfSeats(automobilePage, numberOfSeats);
-    setFuelType(automobilePage, fuelType);
-    setListPrice(automobilePage, listPrice);
-    setLicensePlateNumber(automobilePage, licensePlateNumber);
-    setAnnualMileage(automobilePage, annualMileage);
-    clickNext(automobilePage);
+      // Entering vehicle data
+      setMake(automobilePage, make);
+      setEnginePerformance(automobilePage, enginePerformance);
+      setDateOfManufacture(automobilePage, dateOfManufacture);
+      setNumberOfSeats(automobilePage, numberOfSeats);
+      setFuelType(automobilePage, fuelType);
+      setListPrice(automobilePage, listPrice);
+      setLicensePlateNumber(automobilePage, licensePlateNumber);
+      setAnnualMileage(automobilePage, annualMileage);
+      clickNext(automobilePage);
 
-    // Entering personal data
-    setFirstName(automobilePage, firstName);
-    setLastName(automobilePage, lastName);
-    setDateOfBirth(automobilePage, dateOfBirth);
-    setGenderMale(automobilePage);
-    setStreetAddress(automobilePage, streetAddress);
-    setCountry(automobilePage, country);
-    setZipCode(automobilePage, zipCode);
-    setCity(automobilePage, city);
-    setOccupation(automobilePage, occupation);
-    setSpeeding(automobilePage);
-    setWebsite(automobilePage, website);
-    clickNextButtonProductData(automobilePage);
+      // Entering personal data
+      setFirstName(automobilePage, firstName);
+      setLastName(automobilePage, lastName);
+      setDateOfBirth(automobilePage, dateOfBirth);
+      setGenderMale(automobilePage);
+      setStreetAddress(automobilePage, streetAddress);
+      setCountry(automobilePage, country);
+      setZipCode(automobilePage, zipCode);
+      setCity(automobilePage, city);
+      setOccupation(automobilePage, occupation);
+      setSpeeding(automobilePage);
+      setWebsite(automobilePage, website);
+      clickNextButtonProductData(automobilePage);
 
-    // Entering product data
-    setStartDate(automobilePage, startDate);
-    setInsuranceSum(automobilePage, insuranceSum);
-    setMeritRating(automobilePage, meritRating);
-    setDamageInsurance(automobilePage, damageInsurance);
-    setEuroProtection(automobilePage);
-    setCourtesyCar(automobilePage, courtesyCar);
-    clickNextButtonPriceOption(automobilePage);
+      // Entering product data
+      setStartDate(automobilePage, startDate);
+      setInsuranceSum(automobilePage, insuranceSum);
+      setMeritRating(automobilePage, meritRating);
+      setDamageInsurance(automobilePage, damageInsurance);
+      setEuroProtection(automobilePage);
+      setCourtesyCar(automobilePage, courtesyCar);
+      clickNextButtonPriceOption(automobilePage);
 
-    // Entering price option
-    selectGold(automobilePage);
-    clickNextButtonSendQuote(automobilePage);
+      // Entering price option
+      selectGold(automobilePage);
+      clickNextButtonSendQuote(automobilePage);
 
-    // Entering contact data
-    setEmail(automobilePage, email);
-    setUsername(automobilePage, username);
-    setPassword(automobilePage, password);
-    setConfirmPassword(automobilePage, confirmPassword);
-    clickSendEmail(automobilePage);
+      // Entering contact data
+      setEmail(automobilePage, email);
+      setUsername(automobilePage, username);
+      setPassword(automobilePage, password);
+      setConfirmPassword(automobilePage, confirmPassword);
+      clickSendEmail(automobilePage);
 
-    // Verifying email sent
-    Assert.assertTrue(automobilePage.isEmailSent());
-
+      // Verifying email sent
+      Assert.assertTrue(automobilePage.isEmailSent(), "Email was not sent successfully");
+    } catch (Exception e) {
+      Assert.fail("Test failed with exception: " + e.getMessage(), e);
+    }
   }
 
   @Step("Setting make")
