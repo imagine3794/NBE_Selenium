@@ -13,27 +13,13 @@ pipeline {
         }
         stage('Generate Allure Report') {
             steps {
-                allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'allure-results']],
-                    singleFile: true
-                ])
+                bat 'allure generate ./allure-results --single-file -o ./allure-report'
             }
         }
-    }
-    post {
-        always {
-            allure([
-                includeProperties: false,
-                jdk: '',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']],
-                singleFile: true
-            ])
+        stage('Publish Report') {
+            steps {
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            }
         }
     }
 }
