@@ -29,7 +29,7 @@ public class BaseTest {
   public void setUp() {
     driver = new EdgeDriver();
     driver.manage().window().maximize();
-    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+    driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
   }
 
   @BeforeMethod
@@ -86,6 +86,6 @@ public class BaseTest {
 
   @AfterClass
   public void tearDown() {
-    driver.quit();
+    //driver.quit();
   }
 }
