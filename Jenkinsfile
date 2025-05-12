@@ -15,15 +15,9 @@ pipeline {
                 }
             }
         }
-        stage('Publish Report') {
+        stage('Archive Report') {
             steps {
-                publishHTML(target: [
-                    reportDir: './allure-report',
-                    reportFiles: 'index.html',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true,
-                    allowMissing: true
-                ])
+                archiveArtifacts artifacts: './allure-report/**', fingerprint: true
             }
         }
     }
