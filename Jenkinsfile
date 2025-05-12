@@ -17,7 +17,7 @@ pipeline {
         }
         stage('Archive Report') {
             steps {
-                archiveArtifacts artifacts: './allure-report/**', fingerprint: true
+                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
             }
         }
     }
