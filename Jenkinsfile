@@ -16,8 +16,14 @@ pipeline {
             }
         }
         stage('Publish Report') {
-            steps {
-                archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            ssteps {
+                publishHTML(target: [
+                    reportDir: 'allure-report',
+                    reportFiles: 'index.html',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true,
+                    allowMissing: false
+                ])
             }
         }
     }
