@@ -11,7 +11,7 @@ pipeline {
         stage('Generate Allure Report') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
-                    bat 'allure generate ./allure-results --clean --single-file -o ./allure-report'
+                    bat 'allure generate target/allure-results --single-file -o ./allure-report'
                 }
             }
         }
