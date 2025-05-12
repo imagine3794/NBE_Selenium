@@ -8,12 +8,12 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean test'
+                bat 'mvn clean test'
             }
         }
         stage('Generate Allure Report') {
             steps {
-                sh 'allure generate ./allure-results --clean --single-file -o ./allure-report'
+                bat 'allure generate ./allure-results --clean --single-file -o ./allure-report'
             }
         }
         stage('Publish Report') {
