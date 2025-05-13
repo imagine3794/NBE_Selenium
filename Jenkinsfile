@@ -1,5 +1,6 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             steps {
@@ -8,6 +9,7 @@ pipeline {
                 }
             }
         }
+
         stage('Generate Allure Report') {
             steps {
                 catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
@@ -15,9 +17,17 @@ pipeline {
                 }
             }
         }
+
         stage('Archive Report') {
             steps {
                 archiveArtifacts artifacts: 'allure-report/**', fingerprint: true
+            }
+        }
+
+        stage('Save Locally') {
+            steps {
+                echo 'Copying index.html to Desktop...'
+                bat 'xcopy /Y allure-report\\index.html C:\\Users\\%USERNAME%\\Desktop\\allure-report\\index.html'
             }
         }
     }
