@@ -27,7 +27,7 @@ pipeline {
         stage('Save Locally') {
             steps {
                 echo 'Copying index.html to Desktop...'
-                bat 'xcopy /Y allure-report\\index.html C:\\Users\\%USERNAME%\\Desktop\\allure-report\\index.html'
+                bat 'xcopy /Y allure-report\\index.html C:\\Users\\%USERNAME%\\Desktop\\allure-report\\index.html /F'
             }
         }
     }
